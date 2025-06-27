@@ -36,3 +36,5 @@ courseSchema.pre('save'); */
 
 // 2. Crear el modelo
 const Course = mongoose.model("Course", courseSchema);
+
+module.exports = Course;

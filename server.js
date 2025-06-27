@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("./course"); // Import the course model to ensure it's registered
+const Course = require("./course"); // Import the course model to ensure it's registered
 // Cadena de conexión con credenciales
 const connectionString =
   "mongodb://admin:password123@localhost:27017/espe-mongoose?authSource=admin";
@@ -17,17 +17,71 @@ app.get("/", (req, res) => {
 });
 
 app.post("/course", async (req, res) => {
-  const Course = mongoose.model("Course");
   Course.create({
-    title: "Curso de Mongoose",
-    description: "Curso de Mongoose para aprender a manejar bases de datos",
-    numberOfTopics: 10,
+    title: "Curso de Express",
+    description: "Curso de Express para aprender a manejar Backend con Node",
+    numberOfTopics: 5,
   })
     .then((doc) => {
       res.json(doc);
     })
     .catch((error) => {
       console.log("Error al crear el curso:", error);
+      res.json(error);
+    });
+});
+
+app.get("/course", (req, res) => {
+  Course.find()
+    .then((courses) => {
+      res.json(courses);
+    })
+    .catch((error) => {
+      console.log("Error al obtener los cursos:", error);
+      res.json(error);
+    });
+});
+
+app.get("/course/:id", (req, res) => {
+  const id = req.params.id;
+  Course.findById(id)
+    .then((course) => {
+      res.json(course);
+    })
+    .catch((error) => {
+      console.log("Error al obtener el curso:", error);
+      res.json(error);
+    });
+});
+
+app.put("/course/:id", (req, res) => {
+  const id = req.params.id;
+  // 1. Actualizar multiples campos
+  Course.findByIdAndUpdate(
+    { _id: id },
+    { numberOfTopics: 20 },
+    { publishedAt: new Date() },
+    { new: true }
+  )
+    .then((course) => {
+      res.json(course);
+    })
+    .catch((error) => {
+      console.log("Error al actualizar el curso:", error);
+      res.json(error);
+    });
+});
+
+app.delete("/course/:id", (req, res) => {
+  // Eliminar registros multiples
+  const id = req.params.id;
+  // 1. Actualizar multiples campos
+  Course.findByIdAndDelete({ _id: id })
+    .then(() => {
+      res.json("Curso eliminado");
+    })
+    .catch((error) => {
+      console.log("Error al eliminar el curso:", error);
       res.json(error);
     });
 });
