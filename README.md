@@ -87,80 +87,95 @@ Se establecieron las rutas RESTful siguiendo las convenciones estándar:
 
 La implementación resultó en una API completamente funcional que cumple con todos los requisitos establecidos. Se verificó el correcto funcionamiento de todas las operaciones CRUD mediante pruebas sistemáticas. La conexión con MongoDB se estableció exitosamente utilizando las variables de entorno configuradas. Las validaciones del modelo funcionan correctamente, rechazando datos que no cumplen con los criterios establecidos. La arquitectura del proyecto sigue las mejores prácticas de organización, facilitando el mantenimiento y escalabilidad del código.
 
-| Endpoint         | Método | Funcionalidad    | Estado       |
-| ---------------- | ------ | ---------------- | ------------ |
-| /api/courses     | POST   | Crear curso      | ✅ Funcional |
-| /api/courses     | GET    | Listar cursos    | ✅ Funcional |
-| /api/courses/:id | GET    | Obtener curso    | ✅ Funcional |
-| /api/courses/:id | PUT    | Actualizar curso | ✅ Funcional |
-| /api/courses/:id | DELETE | Eliminar curso   | ✅ Funcional |
+```
+| Endpoint          | Método | Funcionalidad    | Estado      |
+| ----------------- | ------ | ---------------- | ----------- |
+| /api/courses      | POST   | Crear curso      | ✅ Funcional |
+| /api/courses      | GET    | Listar cursos    | ✅ Funcional |
+| /api/courses/\:id | GET    | Obtener curso    | ✅ Funcional |
+| /api/courses/\:id | PUT    | Actualizar curso | ✅ Funcional |
+| /api/courses/\:id | DELETE | Eliminar curso   | ✅ Funcional |`
+```
 
 ## 6. GRÁFICOS O FOTOGRAFÍAS
 
 ### 6.1 Estructura del Proyecto
 
-![Estructura del Proyecto](./images/project-structure.png)
-_Figura 1: Estructura de carpetas y archivos del proyecto_
+```
+.
+├── node_modules/                  # Dependencias instaladas del proyecto
+├── src/                           # Carpeta principal del código fuente
+│   ├── controllers/               # Controladores de lógica de negocio
+│   │   └── courseController.js    # Controlador para operaciones de cursos
+│   ├── models/                    # Definición de modelos de datos
+│   │   └── course.js              # Modelo de curso (ORM/Mongoose)
+│   └── routes/                    # Definición de rutas de la API
+│       └── courseRoutes.js        # Rutas relacionadas con los cursos
+├── .env                           # Variables de entorno (configuración sensible)
+├── .gitignore                     # Archivos y carpetas ignorados por Git
+├── docker-compose.yml            # Configuración de servicios con Docker
+├── package-lock.json             # Registro de versiones exactas de dependencias
+├── package.json                  # Metadatos del proyecto y scripts npm
+├── README.md                     # Documentación del proyecto
+└── server.js                     # Archivo principal del servidor (entry point)
+
+```
 
 ### 6.2 Configuración y Conexión
 
-![Servidor Iniciado](./images/server-running.png)
+![Servidor Iniciado](https://imgur.com/0kfB5fF.png)
 _Figura 2: Servidor Express ejecutándose y conexión exitosa a MongoDB_
 
-![Docker Containers](./images/docker-containers.png)
+![Docker Containers](https://imgur.com/gIWH9SL.png)
 _Figura 3: Contenedores Docker ejecutándose (MongoDB y Mongo Express)_
 
 ### 6.3 Pruebas de Endpoints con Postman
 
 #### POST /api/courses - Crear Curso
 
-![POST Create Course](./images/postman-post-create.png)
+![POST Create Course](https://i.imgur.com/cJhTJRv.png)
 _Figura 4: Creación exitosa de un nuevo curso_
 
-![POST Validation Error](./images/postman-post-error.png)
+![POST Validation Error](https://i.imgur.com/9VUIZwg.png)
 _Figura 5: Error de validación al crear curso con datos inválidos_
 
 #### GET /api/courses - Listar Cursos
 
-![GET All Courses](./images/postman-get-all.png)
+![GET All Courses](https://i.imgur.com/o9aTaN8.png)
 _Figura 6: Obtención de todos los cursos disponibles_
 
 #### GET /api/courses/:id - Obtener Curso Específico
 
-![GET Course by ID](./images/postman-get-by-id.png)
+![GET Course by ID](https://imgur.com/h2hYGCt.png)
 _Figura 7: Obtención de curso específico por ID_
 
 #### PUT /api/courses/:id - Actualizar Curso
 
-![PUT Update Course](./images/postman-put-update.png)
+![PUT Update Course](https://imgur.com/sthzznp.png)
 _Figura 8: Actualización exitosa de un curso existente_
 
 #### DELETE /api/courses/:id - Eliminar Curso
 
-![DELETE Course](./images/postman-delete.png)
+![DELETE Course](https://imgur.com/uWGL43E.png)
+![COMPROBACION DELETE](https://imgur.com/8WwRJNN.png)
 _Figura 9: Eliminación exitosa de un curso_
 
 ### 6.4 Base de Datos MongoDB
 
-#### Mongo Express - Vista General
+#### MongoDB Compass - Vista General
 
-![Mongo Express Dashboard](./images/mongo-express-dashboard.png)
+![Mongo Compass Dashboard](https://imgur.com/miwNPHI.png)
 _Figura 10: Panel de administración de Mongo Express_
 
 #### Colección de Cursos
 
-![Courses Collection](./images/mongo-courses-collection.png)
+![Courses Collection](https://imgur.com/OfhWbDn.png)
 _Figura 11: Documentos almacenados en la colección courses_
 
 #### Documento Individual
 
-![Course Document](./images/mongo-course-document.png)
+![Course Document](https://imgur.com/EfjbXNZ.png)
 _Figura 12: Estructura detallada de un documento curso_
-
-### 6.5 Validaciones y Manejo de Errores
-
-![Validation Error MongoDB](./images/validation-error.png)
-_Figura 13: Error de validación capturado por Mongoose_
 
 ## 7. DISCUSIÓN
 
