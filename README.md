@@ -87,15 +87,13 @@ Se establecieron las rutas RESTful siguiendo las convenciones estándar:
 
 La implementación resultó en una API completamente funcional que cumple con todos los requisitos establecidos. Se verificó el correcto funcionamiento de todas las operaciones CRUD mediante pruebas sistemáticas. La conexión con MongoDB se estableció exitosamente utilizando las variables de entorno configuradas. Las validaciones del modelo funcionan correctamente, rechazando datos que no cumplen con los criterios establecidos. La arquitectura del proyecto sigue las mejores prácticas de organización, facilitando el mantenimiento y escalabilidad del código.
 
-```
-| Endpoint          | Método | Funcionalidad    | Estado      |
-| ----------------- | ------ | ---------------- | ----------- |
+| Endpoint          | Método | Funcionalidad    | Estado       |
+| ----------------- | ------ | ---------------- | ------------ |
 | /api/courses      | POST   | Crear curso      | ✅ Funcional |
 | /api/courses      | GET    | Listar cursos    | ✅ Funcional |
 | /api/courses/\:id | GET    | Obtener curso    | ✅ Funcional |
 | /api/courses/\:id | PUT    | Actualizar curso | ✅ Funcional |
-| /api/courses/\:id | DELETE | Eliminar curso   | ✅ Funcional |`
-```
+| /api/courses/\:id | DELETE | Eliminar curso   | ✅ Funcional |
 
 ## 6. GRÁFICOS O FOTOGRAFÍAS
 
