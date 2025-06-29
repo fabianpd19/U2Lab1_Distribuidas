@@ -42,8 +42,8 @@ exports.updateCourse = async (req, res) => {
 exports.deleteCourse = async (req, res) => {
   try {
     await Course.findByIdAndDelete(req.params.id);
-    res.status(204).send();
+    res.status(200).json({ mensaje: "Curso eliminado correctamente" });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ error: "Error al eliminar el curso", detalle: err });
   }
 };
