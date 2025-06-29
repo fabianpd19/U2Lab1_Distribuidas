@@ -9,7 +9,7 @@ services:
       - ./data-mongo/db:/data/db
       - ./data-mongo/config:/etc/mongod.conf
     ports:
-      - 27017:27017
+      - 27018:27017
     restart: unless-stopped
 
   mongo-express:
