@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const courseController = require("../controllers/courseController");
+const auth = require("../middleware/auth");
 
-router.post("/", courseController.createCourse);
+// ✅ Rutas públicas
 router.get("/", courseController.getAllCourses);
 router.get("/:id", courseController.getCourseById);
-router.put("/:id", courseController.updateCourse);
-router.delete("/:id", courseController.deleteCourse);
+
+// 🔐 Rutas protegidas con autenticación JWT
+router.post("/", auth, courseController.createCourse);
+router.put("/:id", auth, courseController.updateCourse);
+router.delete("/:id", auth, courseController.deleteCourse);
 
 module.exports = router;

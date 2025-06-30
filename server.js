@@ -1,9 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const courseRoutes = require("./src/routes/courseRoutes");
+const authRoutes = require("./src/routes/authRoutes");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Construir URI dinámicamente
@@ -27,6 +30,7 @@ mongoose
 
 // Rutas
 app.use("/api/courses", courseRoutes);
+app.use("/api/auth", authRoutes);
 
 // Inicio del servidor
 app.listen(PORT || 3000, () => {
