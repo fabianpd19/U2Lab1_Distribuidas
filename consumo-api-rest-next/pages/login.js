@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Form, Button, Alert, Container, Card } from "react-bootstrap";
+import Link from "next/link"; // ✅ IMPORT NECESARIO
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,14 +23,26 @@ export default function Login() {
         password,
       });
 
-      // Guardar token en localStorage
       localStorage.setItem("token", res.data.token);
-
-      // Redireccionar al home
       router.push("/");
     } catch (error) {
-      console.error("Error de login:", error);
-      setError(error.response?.data?.message || "Error de autenticación");
+      // Captura robusta del error
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // Error del servidor con respuesta
+          setError(error.response.data?.message || "Credenciales incorrectas.");
+        } else if (error.request) {
+          // No hubo respuesta
+          setError("No se pudo contactar al servidor.");
+        } else {
+          // Otro error relacionado a la solicitud
+          setError("Error desconocido al hacer la solicitud.");
+        }
+      } else {
+        // Error completamente inesperado (puede evitar que Next.js muestre el rojo)
+        console.error("Error inesperado:", error);
+        setError("Ocurrió un error inesperado.");
+      }
     } finally {
       setLoading(false);
     }
@@ -77,6 +90,15 @@ export default function Login() {
                   {loading ? "Iniciando sesión..." : "Ingresar"}
                 </Button>
               </Form>
+              <hr className="my-4" />
+              <div className="text-center">
+                <p className="mb-0">
+                  ¿No tienes cuenta?{" "}
+                  <Link href="/register" className="text-decoration-none">
+                    Regístrate aquí
+                  </Link>
+                </p>
+              </div>
             </Card.Body>
           </Card>
         </div>
